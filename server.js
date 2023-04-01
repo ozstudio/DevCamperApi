@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
 const colors = require('colors');
+const errorHandler = require('./middleware/error')
 
 //load env
  dotenv.config({path :'./config/config.env'});
@@ -13,11 +14,15 @@ const colors = require('colors');
 
 
 //route files
-const bootcamps = require('./routes/bootcamps')
+const bootcamps = require('./routes/bootcamps');
+
+
 
 
 
  const app = express();
+
+
 
  //body parser
  app.use(express.json());
@@ -32,6 +37,9 @@ const bootcamps = require('./routes/bootcamps')
 
 //mount routes
 app.use('/api/v1/bootcamps',bootcamps);
+
+//must be after 'mount routes'
+app.use(errorHandler);
 
 
 
