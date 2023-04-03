@@ -26,6 +26,7 @@ const errorHandler = require('./middleware/error');
 //route files
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
+const auth = require('./routes/auth');
 
 
 
@@ -50,6 +51,7 @@ const courses = require('./routes/courses');
 //mount routes
 app.use('/api/v1/bootcamps',bootcamps);
 app.use('/api/v1/courses',courses);
+app.use('/api/v1/auth',auth);
 
 //must be after 'mount routes'
 app.use(errorHandler);
