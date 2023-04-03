@@ -1,16 +1,26 @@
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
+const fileupload = require('express-fileupload');
 const colors = require('colors');
-const errorHandler = require('./middleware/error')
+const errorHandler = require('./middleware/error');
+
 
 //load env
  dotenv.config({path :'./config/config.env'});
 
+ const app = express();
+
  //connect to db
  connectDB();
 
+ //file uploading
+ app.use(fileupload());
+
+ //set static folder (express)
+ app.use(express.static(path.join(__dirname,'public')));
 
 
 //route files
@@ -22,7 +32,7 @@ const courses = require('./routes/courses');
 
 
 
- const app = express();
+
 
 
 
